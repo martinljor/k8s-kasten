@@ -53,11 +53,17 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 sudo apt install docker.io
 
 sudo mkdir /etc/containerd
+
 sudo sh -c "containerd config default > /etc/containerd/config.toml"
+
 sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
+
 sudo systemctl restart containerd.service
+
 sudo systemctl restart kubelet.service
+
 sudo systemctl enable kubelet.service
+
 sudo kubeadm config images pull
 
 sudo kubeadm init --pod-network-cidr=10.10.0.0/16
